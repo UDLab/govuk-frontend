@@ -171,10 +171,7 @@
         // IE8 fallback of icon with HTML symbol
         @include govuk-if-ie8 {
           content: "\25B2"; // "▲"
-
-          top: 0;
-          left: 0;
-
+          position: relative;
           border: 0;
         }
       }
@@ -197,7 +194,7 @@
     .govuk-accordion__section-button {
       width: 100%;
 
-      padding: govuk-spacing(2) 0 govuk-spacing(1) 0;
+      padding: govuk-spacing(2) 0 govuk-spacing(3) 0;
 
       border: 0;
 
@@ -320,7 +317,11 @@
     // As a result this is applied to the pseudo element that has a display:block property to maintain Design
     .govuk-accordion__section-summary:before,
     .govuk-accordion__section-toggle:before {
-      margin-top: 8px;
+      margin-top: govuk-spacing(2);
+
+      @include govuk-media-query ($from: desktop) {
+        margin-top: 8px;
+      }
     }
 
     // Space between icon and text,
