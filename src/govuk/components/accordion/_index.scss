@@ -125,7 +125,6 @@
 
     .govuk-accordion__section-heading {
       padding: 0;
-      border-top: $govuk-accordion-bottom-border-width solid $govuk-border-colour;
     }
 
     // Create Chevron icon aligned with text
@@ -198,9 +197,14 @@
     .govuk-accordion__section-button {
       width: 100%;
 
-      padding: govuk-spacing(2) 0 govuk-spacing(3);
+      padding: govuk-spacing(2) 0 govuk-spacing(1) 0;
 
-      border-width: 0;
+      border: 0;
+
+      border-top: $govuk-accordion-bottom-border-width solid $govuk-border-colour;
+      // Visually separate the section from the one underneath when user changes colours in their
+      // browser.
+      border-bottom: govuk-spacing(2) solid transparent;
 
       color: $govuk-text-colour;
       background: none;
