@@ -23,12 +23,12 @@ function Accordion ($module) {
   this.$module = $module
   this.moduleId = $module.getAttribute('id')
   this.$sections = $module.querySelectorAll('.govuk-accordion__section')
-  this.$openAllButton = ''
+  this.$showAllButton = ''
   this.browserSupportsSessionStorage = helper.checkForSessionStorage()
 
   this.controlsClass = 'govuk-accordion__controls'
-  this.openAllClass = 'govuk-accordion__show-all'
-  this.openAllTextClass = 'govuk-accordion__show-all-text'
+  this.showAllClass = 'govuk-accordion__show-all'
+  this.showAllTextClass = 'govuk-accordion__show-all-text'
 
   this.sectionHeaderClass = 'govuk-accordion__section-header'
   this.sectionHeadingClass = 'govuk-accordion__section-heading'
@@ -57,35 +57,35 @@ Accordion.prototype.init = function () {
 
   // See if "Show all sections" button text should be updated
   var areAllSectionsOpen = this.checkIfAllSectionsOpen()
-  this.updateOpenAllButton(areAllSectionsOpen)
+  this.updateshowAllButton(areAllSectionsOpen)
 }
 
 // Initialise controls and set attributes
 Accordion.prototype.initControls = function () {
   // Create "Show all" button and set attributes
-  this.$openAllButton = document.createElement('button')
-  this.$openAllButton.setAttribute('type', 'button')
-  this.$openAllButton.setAttribute('class', this.openAllClass)
-  this.$openAllButton.setAttribute('aria-expanded', 'false')
+  this.$showAllButton = document.createElement('button')
+  this.$showAllButton.setAttribute('type', 'button')
+  this.$showAllButton.setAttribute('class', this.showAllClass)
+  this.$showAllButton.setAttribute('aria-expanded', 'false')
 
   // Create icon, add to element
   var $icon = document.createElement('span')
   $icon.classList.add(this.upChevronIconClass)
-  this.$openAllButton.appendChild($icon)
+  this.$showAllButton.appendChild($icon)
 
   // Create control wrapper and add controls to it
   var $accordionControls = document.createElement('div')
   $accordionControls.setAttribute('class', this.controlsClass)
-  $accordionControls.appendChild(this.$openAllButton)
+  $accordionControls.appendChild(this.$showAllButton)
   this.$module.insertBefore($accordionControls, this.$module.firstChild)
 
   // Build additional wrapper for open all toggle text and place after icon
-  var $wrapperOpenAllText = document.createElement('span')
-  $wrapperOpenAllText.classList.add(this.openAllTextClass)
-  this.$openAllButton.appendChild($wrapperOpenAllText)
+  var $wrappershowAllText = document.createElement('span')
+  $wrappershowAllText.classList.add(this.showAllTextClass)
+  this.$showAllButton.appendChild($wrappershowAllText)
 
   // Handle click events on the show/hide all button
-  this.$openAllButton.addEventListener('click', this.onOpenOrCloseAllToggle.bind(this))
+  this.$showAllButton.addEventListener('click', this.onOpenOrCloseAllToggle.bind(this))
 }
 
 // Initialise section headers
@@ -214,7 +214,7 @@ Accordion.prototype.onOpenOrCloseAllToggle = function () {
     $module.storeState($section)
   })
 
-  $module.updateOpenAllButton(nowExpanded)
+  $module.updateshowAllButton(nowExpanded)
 }
 
 // Set section attributes when opened/closed
@@ -244,7 +244,7 @@ Accordion.prototype.setExpanded = function (expanded, $section) {
 
   // See if "Show all sections" button text should be updated
   var areAllSectionsOpen = this.checkIfAllSectionsOpen()
-  this.updateOpenAllButton(areAllSectionsOpen)
+  this.updateshowAllButton(areAllSectionsOpen)
 }
 
 // Get state of section
@@ -264,12 +264,12 @@ Accordion.prototype.checkIfAllSectionsOpen = function () {
 }
 
 // Update "Show all sections" button
-Accordion.prototype.updateOpenAllButton = function (expanded) {
-  var $showAllIcon = this.$openAllButton.querySelector('.' + this.upChevronIconClass)
-  var $openAllCopy = this.$openAllButton.querySelector('.' + this.openAllTextClass)
+Accordion.prototype.updateshowAllButton = function (expanded) {
+  var $showAllIcon = this.$showAllButton.querySelector('.' + this.upChevronIconClass)
+  var $showAllText = this.$showAllButton.querySelector('.' + this.showAllTextClass)
   var newButtonText = expanded ? 'Hide all sections' : 'Show all sections'
-  this.$openAllButton.setAttribute('aria-expanded', expanded)
-  $openAllCopy.innerHTML = newButtonText
+  this.$showAllButton.setAttribute('aria-expanded', expanded)
+  $showAllText.innerHTML = newButtonText
 
   // Swap icon, toggle class
   if (expanded) {

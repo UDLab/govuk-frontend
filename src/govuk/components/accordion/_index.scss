@@ -198,7 +198,7 @@
       border-top: $govuk-accordion-bottom-border-width solid $govuk-border-colour;
 
       // Visually separate the section from the one underneath when user changes colours in their
-      // browser.
+      // browser. See https://github.com/alphagov/govuk-frontend/issues/2321#issuecomment-924201488
       border-bottom: govuk-spacing(2) solid transparent;
 
       color: $govuk-text-colour;
